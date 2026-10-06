@@ -1,0 +1,5 @@
+tests:
+  sample.bluetooth.android_emulator:
+    platform_allow: native_sim
+    harness: pytest
+    timeout: 600

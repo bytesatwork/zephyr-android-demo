@@ -1,0 +1,32 @@
+name: Test run
+on: push
+
+jobs:
+  test-run:
+    runs-on:
+      labels: fast-runner
+
+    steps:
+      - uses: mathio/gha-cleanup@v1
+        with:
+          remove-browsers: true
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: demo
+
+      - name: Install west
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends python3-pip
+          pip3 install -U west
+
+      - name: Initialize the project with west
+        run: |
+          west init -l demo
+          west update
+
+      - name: Run the tests inside docker
+        run: |
+          demo/run.sh

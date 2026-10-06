@@ -1,0 +1,13 @@
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: 3c61a12bdd8b2975b9180abcb80779ad3724a40d
+      import:
+        name-allowlist:
+          - mbedtls
+          - tf-psa-crypto

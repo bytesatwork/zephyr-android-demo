@@ -1,0 +1,30 @@
+/ {
+	aliases {
+		ambient-temp0 = &ambient_temp0;
+	};
+
+	ambient_temp0: ntc-thermistor-generic {
+		compatible = "ntc-thermistor-generic";
+		io-channels = <&adc0 0>;
+		pullup-uv = <3300000>;
+		pullup-ohm = <0>;
+		pulldown-ohm = <10000>;
+		connected-positive;
+		zephyr,compensation-table = <0 56132>, <25 23033>;
+	};
+};
+
+&adc0 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	ref-vdd-mv = <1000>;
+
+	channel@0 {
+		reg = <0>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_VDD_1";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,resolution = <12>;
+	};
+};
